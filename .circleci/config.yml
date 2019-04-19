@@ -1,0 +1,15 @@
+version: 2.1
+orbs:
+  # https://circleci.com/orbs/registry/orb/circleci/docker-publish
+  docker: circleci/docker-publish@0.1.6
+workflows:
+  build-and-publish:
+    jobs:
+      - docker/publish:
+          name: build-and-publish-image-dockerhub
+          image: $DOCKER_LOGIN/alpine-ci
+        filters:
+          branches:
+            only: master
+        context: general
+

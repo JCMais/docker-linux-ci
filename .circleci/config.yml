@@ -8,8 +8,8 @@ workflows:
       - docker/publish:
           name: build-and-publish-image-dockerhub
           image: $DOCKER_LOGIN/alpine-ci
-        filters:
-          branches:
-            only: master
-        context: general
+          context: general
+          filters:
+            branches:
+              only: master
 

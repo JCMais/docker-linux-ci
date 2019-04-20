@@ -17,8 +17,7 @@ RUN \
     # OpenSSL building
     perl linux-headers \
     # libssh2 building 
-    libtool
-
+    autoconf automake libtool
 
 COPY --from=node:8-alpine /usr/local/bin/node /usr/local/bin/node8
 COPY --from=node:10-alpine /usr/local/bin/node /usr/local/bin/node10

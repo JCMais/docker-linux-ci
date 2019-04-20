@@ -12,4 +12,10 @@ workflows:
           filters:
             branches:
               only: master
-
+          after_build:
+            - run:
+                name: Tag as latest
+                command: |
+                  docker tag \
+                    docker.io/$DOCKER_LOGIN/alpine-ci:$CIRCLE_SHA1 \
+                    docker.io/$DOCKER_LOGIN/alpine-ci:latest

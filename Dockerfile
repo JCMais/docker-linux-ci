@@ -5,7 +5,7 @@ LABEL maintainer="Jonathan Cardoso Machado <https://twitter.com/_jonathancardos>
 RUN \
   apk --no-cache add --virtual .rundeps \
     # basic stuff
-    bash ca-certificates curl docker git openssh-client openssl parallel \
+    bash ca-certificates curl docker git gnupg openssh-client openssl parallel \
     # gnu sort etc
     coreutils \
     # Node.js addon building

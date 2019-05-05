@@ -8,8 +8,9 @@ LABEL maintainer="Jonathan Cardoso Machado <https://twitter.com/_jonathancardos>
 # First install stuff that will be needed
 RUN \
   apk --no-cache add --virtual .rundeps \
-    # basic stuff
-    bash ca-certificates curl docker git gnupg openssh-client openssl parallel pkgconfig \
+    # general stuff
+    bash ca-certificates cmake curl docker git \
+    gnupg openssh-client openssl parallel pkgconfig \
     # gnu sort etc
     coreutils \
     # Node.js addon building
@@ -17,11 +18,13 @@ RUN \
     # OpenSSL building
     perl linux-headers \
     # libssh2 building 
-    autoconf automake libtool
+    autoconf automake libtool \
+    # kerberos related
+    texinfo flex bison build-base libedit-dev mdocml-soelim
 
 COPY --from=node:8-alpine /usr/local/bin/node /usr/local/bin/node8
 COPY --from=node:10-alpine /usr/local/bin/node /usr/local/bin/node10
-COPY --from=node:11-alpine /usr/local/bin/node /usr/local/bin/node11
+COPY --from=node:12-alpine /usr/local/bin/node /usr/local/bin/node12
 
 ENV YARN_VERSION 1.15.2
 

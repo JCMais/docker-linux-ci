@@ -1,5 +1,5 @@
-# docker-alpine-ci
+# docker-linux-ci
 
-This is a docker image I use to build stuff on CI when it's necessary to use Alpine.
-
+Collection of docker images I use when building on linux.
+ 
 It's currently being used to build my Node.js libcurl addon [`node-libcurl`](https://github.com/JCMais/node-libcurl)

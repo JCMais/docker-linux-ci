@@ -1,13 +1,13 @@
 version: 2.1
 orbs:
-  # https://circleci.com/orbs/registry/orb/circleci/docker-publish
-  docker: circleci/docker-publish@0.1.6
+  docker: circleci/docker@0.1.0
 workflows:
   build-and-publish:
     jobs:
       - docker/publish:
-          name: build-and-publish-image-dockerhub
+          name: build-and-publish-alpine-image-dockerhub
           image: $DOCKER_LOGIN/alpine-ci
+          dockerfile: alpine.dockerfile
           context: general
           filters:
             branches:
@@ -19,3 +19,18 @@ workflows:
                   docker tag \
                     docker.io/$DOCKER_LOGIN/alpine-ci:$CIRCLE_SHA1 \
                     docker.io/$DOCKER_LOGIN/alpine-ci:latest
+      - docker/publish:
+          name: build-and-publish-debian-image-dockerhub
+          image: $DOCKER_LOGIN/debian-ci
+          dockerfile: debian.dockerfile
+          context: general
+          filters:
+            branches:
+              only: master
+          after_build:
+            - run:
+                name: Tag as latest
+                command: |
+                  docker tag \
+                    docker.io/$DOCKER_LOGIN/debian-ci:$CIRCLE_SHA1 \
+                    docker.io/$DOCKER_LOGIN/debian-ci:latest

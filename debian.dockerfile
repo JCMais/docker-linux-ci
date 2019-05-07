@@ -43,6 +43,7 @@ RUN for key in \
   && mkdir -p ~/.yarn \
   && tar -xzf yarn-v$YARN_VERSION.tar.gz -C ~/.yarn/ \
   && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
-  && echo "PATH=\$HOME/.yarn/yarn-v$YARN_VERSION/bin:\$PATH" >> ~/.bashrc
+  && echo "export PATH=\$HOME/.yarn/yarn-v$YARN_VERSION/bin:\$PATH" >> ~/.bashrc \
+  && echo 'export PATH="$(yarn global bin):$PATH"' >> ~/.bashrc
 
 ENTRYPOINT [ "/bin/bash" ]

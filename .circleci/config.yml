@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  docker: circleci/docker@0.1.7
+  docker: circleci/docker@0.1.0
 workflows:
   build-and-publish:
     jobs:
@@ -17,8 +17,9 @@ workflows:
                 name: Tag as latest
                 command: |
                   docker tag \
-                    $DOCKER_LOGIN/alpine-ci:$CIRCLE_SHA1 \
-                    $DOCKER_LOGIN/alpine-ci:latest
+                    docker.io/$DOCKER_LOGIN/alpine-ci:$CIRCLE_SHA1 \
+                    docker.io/$DOCKER_LOGIN/alpine-ci:latest
+            - run: docker push docker.io/$DOCKER_LOGIN/alpine-ci:latest
       - docker/publish:
           name: build-and-publish-debian-image-dockerhub
           image: $DOCKER_LOGIN/debian-ci
@@ -32,5 +33,6 @@ workflows:
                 name: Tag as latest
                 command: |
                   docker tag \
-                    $DOCKER_LOGIN/debian-ci:$CIRCLE_SHA1 \
-                    $DOCKER_LOGIN/debian-ci:latest
+                    docker.io/$DOCKER_LOGIN/debian-ci:$CIRCLE_SHA1 \
+                    docker.io/$DOCKER_LOGIN/debian-ci:latest
+            - run: docker push docker.io/$DOCKER_LOGIN/debian-ci:latest

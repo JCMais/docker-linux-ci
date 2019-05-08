@@ -46,4 +46,6 @@ RUN for key in \
   && echo "export PATH=\$HOME/.yarn/yarn-v$YARN_VERSION/bin:\$PATH" >> ~/.bashrc \
   && echo 'export PATH="$(yarn global bin):$PATH"' >> ~/.bashrc
 
-ENTRYPOINT [ "/bin/bash" ]
+# https://github.com/CircleCI-Public/circleci-dockerfiles/blob/f8f0b1f027d86f2/buildpack-deps/images/stretch/browsers/Dockerfile#L76
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["/bin/bash"]

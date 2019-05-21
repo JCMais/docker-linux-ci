@@ -36,3 +36,19 @@ workflows:
                     docker.io/$DOCKER_LOGIN/debian-ci:$CIRCLE_SHA1 \
                     docker.io/$DOCKER_LOGIN/debian-ci:latest
             - run: docker push docker.io/$DOCKER_LOGIN/debian-ci:latest
+      - docker/publish:
+          name: build-and-publish-arm32v7-image-dockerhub
+          image: $DOCKER_LOGIN/arm32v7-ci
+          dockerfile: arm32v7.dockerfile
+          context: general
+          filters:
+            branches:
+              only: master
+          after_build:
+            - run:
+                name: Tag as latest
+                command: |
+                  docker tag \
+                    docker.io/$DOCKER_LOGIN/arm32v7-ci:$CIRCLE_SHA1 \
+                    docker.io/$DOCKER_LOGIN/arm32v7-ci:latest
+            - run: docker push docker.io/$DOCKER_LOGIN/arm32v7-ci:latest

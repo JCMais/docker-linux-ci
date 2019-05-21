@@ -1,5 +1,7 @@
 FROM circleci/buildpack-deps:stretch-browsers
 
+LABEL maintainer="Jonathan Cardoso Machado <https://twitter.com/_jonathancardos>"
+
 # Install missing packages
 RUN sudo apt-get update \
   && sudo apt-get install -y \

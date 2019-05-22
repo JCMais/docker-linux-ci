@@ -99,6 +99,8 @@ RUN for key in \
   && echo "export PATH=\$HOME/.yarn/yarn-v$YARN_VERSION/bin:\$PATH" >> ~/.bashrc \
   && echo 'export PATH="$(yarn global bin):$PATH"' >> ~/.bashrc
 
+USER root
 RUN rm /usr/bin/qemu-arm-static
+USER circleci
 
 CMD ["/bin/sh"]

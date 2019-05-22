@@ -4,6 +4,8 @@ FROM arm32v7/buildpack-deps:stretch
 
 LABEL maintainer="Jonathan Cardoso Machado <https://twitter.com/_jonathancardos>"
 
+COPY ./qemu-arm-static /usr/bin/qemu-arm-static
+
 # make Apt non-interactive
 RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci \
   && echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90circleci
@@ -96,5 +98,7 @@ RUN for key in \
   && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
   && echo "export PATH=\$HOME/.yarn/yarn-v$YARN_VERSION/bin:\$PATH" >> ~/.bashrc \
   && echo 'export PATH="$(yarn global bin):$PATH"' >> ~/.bashrc
+
+RUN rm /usr/bin/qemu-arm-static
 
 CMD ["/bin/sh"]

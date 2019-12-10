@@ -23,9 +23,16 @@ RUN \
     texinfo flex bison build-base libedit-dev mdocml-soelim
 
 COPY --from=node:8-alpine3.9 /usr/local/bin/node /usr/local/bin/node8
+RUN /usr/local/bin/node8 -e 'console.log(process.versions)'
+
 COPY --from=node:10-alpine3.9 /usr/local/bin/node /usr/local/bin/node10
+RUN /usr/local/bin/node10 -e 'console.log(process.versions)'
+
 COPY --from=node:12-alpine3.9 /usr/local/bin/node /usr/local/bin/node12
-COPY --from=node:13-alpine3.9 /usr/local/bin/node /usr/local/bin/node13
+RUN /usr/local/bin/node12 -e 'console.log(process.versions)'
+
+COPY --from=node:13-alpine3.10 /usr/local/bin/node /usr/local/bin/node13
+RUN /usr/local/bin/node13 -e 'console.log(process.versions)'
 
 ENV YARN_VERSION 1.15.2
 

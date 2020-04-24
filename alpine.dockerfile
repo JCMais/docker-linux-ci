@@ -34,6 +34,9 @@ RUN /usr/local/bin/node12 -e 'console.log(process.versions)'
 COPY --from=node:13-alpine3.10 /usr/local/bin/node /usr/local/bin/node13
 RUN /usr/local/bin/node13 -e 'console.log(process.versions)'
 
+COPY --from=node:14-alpine3.10 /usr/local/bin/node /usr/local/bin/node14
+RUN /usr/local/bin/node14 -e 'console.log(process.versions)'
+
 ENV YARN_VERSION 1.15.2
 
 RUN for key in \

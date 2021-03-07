@@ -14,7 +14,7 @@ RUN echo "Downloading automake" && cd ~ && wget ftp://ftp.gnu.org/gnu/automake/a
       && echo "Building and installing automake" && ./configure && make && sudo make install
 
 # Install nvm
-ARG DEFAULT_NODEJS_VERSION="12"
+ARG DEFAULT_NODEJS_VERSION="14"
 ENV DEFAULT_NODEJS_VERSION=$DEFAULT_NODEJS_VERSION
 
 SHELL ["/bin/bash", "-c"]

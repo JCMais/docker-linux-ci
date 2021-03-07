@@ -77,7 +77,7 @@ export NVM_DIR="$HOME/.nvm"\n\
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm\n\
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' > ~/.bashrc
 
-RUN source /home/circleci/.bashrc && nvm install 8 && nvm install 10 && nvm install 12 && nvm use $DEFAULT_NODEJS_VERSION
+RUN source /home/circleci/.bashrc && nvm install 8 && nvm install 10 && nvm install 12 && nvm install 14 && nvm install 15 && nvm use $DEFAULT_NODEJS_VERSION
 
 # Yarn
 ENV YARN_VERSION 1.15.2

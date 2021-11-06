@@ -80,24 +80,12 @@ export NVM_DIR="$HOME/.nvm"\n\
 RUN source /home/circleci/.bashrc && nvm install 8 && nvm install 10 && nvm install 12 && nvm install 14 && nvm install 15 && nvm use $DEFAULT_NODEJS_VERSION
 
 # Yarn
-ENV YARN_VERSION 1.15.2
-
-RUN for key in \
-    6A010C5166006599AA17F08146C2130DFD2497F5 \
-  ; do \
-    gpg --batch --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" || \
-    gpg --batch --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys "$key" || \
-    gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
-  done \
-  && cd /home/circleci \
-  && curl -fsSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
-  && curl -fsSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz.asc" \
-  && gpg --batch --verify yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
-  && mkdir -p ~/.yarn \
-  && tar -xzf yarn-v$YARN_VERSION.tar.gz -C ~/.yarn/ \
-  && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
-  && echo "export PATH=\$HOME/.yarn/yarn-v$YARN_VERSION/bin:\$PATH" >> ~/.bashrc \
-  && echo 'export PATH="$(yarn global bin):$PATH"' >> ~/.bashrc
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
+     "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
+     sudo apt update && sudo apt install --no-install-recommends yarn && \
+     echo 'export PATH="$(yarn global bin):$PATH"' >> ~/.bashrc
+  
+RUN yarn --version
 
 USER root
 RUN rm /usr/bin/qemu-arm-static

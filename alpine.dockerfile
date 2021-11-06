@@ -14,7 +14,7 @@ RUN \
     # gnu sort etc
     coreutils \
     # Node.js addon building
-    python make g++ \
+    python python3 py3-pip make g++ \
     # OpenSSL building
     perl linux-headers \
     # libssh2 building 
@@ -39,6 +39,9 @@ RUN /usr/local/bin/node15 -e 'console.log(process.versions)'
 
 COPY --from=node:16-alpine3.11 /usr/local/bin/node /usr/local/bin/node16
 RUN /usr/local/bin/node16 -e 'console.log(process.versions)'
+
+COPY --from=node:17-alpine3.11 /usr/local/bin/node /usr/local/bin/node16
+RUN /usr/local/bin/node17 -e 'console.log(process.versions)'
 
 ENV YARN_VERSION 1.15.2
 

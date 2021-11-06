@@ -5,7 +5,7 @@ LABEL maintainer="Jonathan Cardoso Machado <https://twitter.com/_jonathancardos>
 # Install missing packages
 RUN sudo apt-get update \
   && sudo apt-get install -y \
-        texinfo gperf ruby-ronn cmake libtool \
+        texinfo gperf ruby-ronn cmake libtool python3 \
   && sudo rm -rf /var/lib/apt/lists/*
 
 # Update automake

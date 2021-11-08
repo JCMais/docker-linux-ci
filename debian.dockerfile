@@ -30,12 +30,10 @@ RUN source /home/circleci/.bashrc && nvm install $DEFAULT_NODEJS_VERSION
 
 # Yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
-     "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
-     sudo apt update && sudo apt install --no-install-recommends yarn && \
+     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
+     sudo apt-get update && sudo apt-get install --no-install-recommends yarn && \
      echo 'export PATH="$(yarn global bin):$PATH"' >> ~/.bashrc
   
-RUN yarn --version
-
 # https://github.com/CircleCI-Public/circleci-dockerfiles/blob/f8f0b1f027d86f2/buildpack-deps/images/stretch/browsers/Dockerfile#L76
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/bin/bash"]

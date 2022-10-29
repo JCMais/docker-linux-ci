@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  docker: circleci/docker@0.1.0
+  docker: circleci/docker@2.1.4
 workflows:
   build-and-publish:
     jobs:

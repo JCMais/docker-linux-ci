@@ -1,0 +1,2 @@
+# u gotta download it - see the .circleci/config.yml file for the command
+qemu-arm-static

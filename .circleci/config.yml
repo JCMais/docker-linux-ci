@@ -6,7 +6,9 @@ workflows:
     jobs:
       - docker/publish:
           name: build-and-publish-alpine-image-dockerhub
-          remote-docker-version: 20.10.12
+          executor:
+            name: machine
+            image: ubuntu-2204:2022.10.1
           image: $DOCKER_LOGIN/alpine-ci
           dockerfile: alpine.dockerfile
           context: general
@@ -23,7 +25,9 @@ workflows:
             - run: docker push docker.io/$DOCKER_LOGIN/alpine-ci:latest
       - docker/publish:
           name: build-and-publish-debian-image-dockerhub
-          remote-docker-version: 20.10.12
+          executor:
+            name: machine
+            image: ubuntu-2204:2022.10.1
           image: $DOCKER_LOGIN/debian-ci
           dockerfile: debian.dockerfile
           context: general
@@ -40,6 +44,9 @@ workflows:
             - run: docker push docker.io/$DOCKER_LOGIN/debian-ci:latest
       - docker/publish:
           name: build-and-publish-arm32v7-image-dockerhub
+          executor:
+            name: machine
+            image: ubuntu-2204:2022.10.1
           remote-docker-version: 20.10.12
           image: $DOCKER_LOGIN/arm32v7-ci
           dockerfile: arm32v7.dockerfile

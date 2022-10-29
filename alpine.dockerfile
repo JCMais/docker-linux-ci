@@ -7,7 +7,7 @@ LABEL maintainer="Jonathan Cardoso Machado <https://twitter.com/_jonathancardos>
 
 # First install stuff that will be needed
 RUN \
-  apk --no-cache add --virtual .rundeps \
+  apk update && apk --no-cache add --virtual .rundeps \
     # general stuff
     bash ca-certificates cmake curl docker git \
     gnupg openssh-client openssl parallel pkgconfig \
@@ -21,6 +21,8 @@ RUN \
     autoconf automake libtool \
     # kerberos related
     texinfo flex bison build-base libedit-dev mandoc-soelim
+RUN python -V
+RUN python3 -V
 
 COPY --from=node:14-alpine3.16 /usr/local/bin/node /usr/local/bin/node14
 RUN /usr/local/bin/node14 -e 'console.log(process.versions)'

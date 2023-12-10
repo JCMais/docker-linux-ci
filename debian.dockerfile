@@ -14,7 +14,7 @@ RUN echo "Downloading automake" && cd ~ && wget ftp://ftp.gnu.org/gnu/automake/a
       && echo "Building and installing automake" && ./configure && make && sudo make install
 
 # Install nvm
-ARG DEFAULT_NODEJS_VERSION="18"
+ARG DEFAULT_NODEJS_VERSION="20"
 ENV DEFAULT_NODEJS_VERSION=$DEFAULT_NODEJS_VERSION
 
 SHELL ["/bin/bash", "-c"]
@@ -27,10 +27,9 @@ export NVM_DIR="$HOME/.nvm"\n\
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' > ~/.bashrc
 
 RUN source /home/circleci/.bashrc \
-      && nvm install 14 \
-      && nvm install 16 \
       && nvm install 18 \
-      && nvm install 19 \
+      && nvm install 20 \
+      && nvm install 21 \
       && nvm use $DEFAULT_NODEJS_VERSION
 
 # Yarn

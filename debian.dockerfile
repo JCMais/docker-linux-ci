@@ -1,4 +1,4 @@
-FROM cimg/base:2022.10
+FROM cimg/base:2024.12
 
 LABEL maintainer="Jonathan Cardoso Machado <https://twitter.com/_jonathancardos>"
 
@@ -9,17 +9,17 @@ RUN sudo apt-get update \
   && sudo rm -rf /var/lib/apt/lists/*
 
 # Update automake
-RUN echo "Downloading automake" && cd ~ && wget ftp://ftp.gnu.org/gnu/automake/automake-1.16.5.tar.gz \
-      && echo "Untar automake dist file" && tar -xzf automake-1.16.5.tar.gz && cd automake-1.16.5 \
+RUN echo "Downloading automake" && cd ~ && wget ftp://ftp.gnu.org/gnu/automake/automake-1.17.tar.gz \
+      && echo "Untar automake dist file" && tar -xzf automake-1.17.tar.gz && cd automake-1.17 \
       && echo "Building and installing automake" && ./configure && make && sudo make install
 
 # Install nvm
-ARG DEFAULT_NODEJS_VERSION="20"
+ARG DEFAULT_NODEJS_VERSION="22"
 ENV DEFAULT_NODEJS_VERSION=$DEFAULT_NODEJS_VERSION
 
 SHELL ["/bin/bash", "-c"]
 
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
 RUN echo $'\n\
 export NVM_DIR="$HOME/.nvm"\n\
@@ -30,6 +30,8 @@ RUN source /home/circleci/.bashrc \
       && nvm install 18 \
       && nvm install 20 \
       && nvm install 21 \
+      && nvm install 22 \
+      && nvm install 23 \
       && nvm use $DEFAULT_NODEJS_VERSION
 
 # Yarn
